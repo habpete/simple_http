@@ -32,6 +32,7 @@ int main (int argc, char* argv[]) {
     std::string response;
     Send(qParams, response);
 
+    delete qParams;
     std::cout << response << std::endl;
 
     return 0;
