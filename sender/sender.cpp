@@ -2,6 +2,7 @@
 
 #include <boost/asio.hpp>
 #include <ostream>
+#include <istream>
 #include <regex>
 
 using boost::asio::ip::tcp;
@@ -66,7 +67,7 @@ namespace senderUtils {
 namespace senderHelpers {
     void fillRequestStream(Query*& query, std::ostream& refReqStream) {
         refReqStream << senderUtils::getQueryTypeString(query->qType) << " " << senderUtils::getUri(query->host) << "HTTP/1.1\r\n";
-        refReqStream << "Host: " << "\r\n";
+        refReqStream << "Host: " << senderUtils::getHostString(query->host) << "\r\n";
         refReqStream << "Transfer-Encoding: chunked\r\n";
         refReqStream << "Connection: close\r\n";
 
@@ -76,7 +77,14 @@ namespace senderHelpers {
 
         refReqStream << query->body << "\r\n\r\n";
     }
-    void getResponseString(boost::asio::streambuf& responseStream, std::string& outResponseString) {}
+    void getResponseString(boost::asio::streambuf& responseStream, std::string& outResponseString) {
+        std::istream is(&responseStream);
+
+        std::string tmpLine;
+        while(std::getline(is, tmpLine)) {
+            outResponseString += tmpLine;
+        }
+    }
 };
 
 void Send(Query*& query, std::string& outResponse) {
