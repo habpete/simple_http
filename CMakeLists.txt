@@ -14,5 +14,5 @@ endif(Boost_FOUND)
 
 set(USED_LIBS ${Boost_SYSTEM_LIBRARY} ${Boost_THREAD_LIBRARY} ${Boost_REGEX_LIBRARY})
 
-add_executable (main main.cpp internal/service.h internal/service.cpp internal/spec/spec.h internal/parser/parser.h internal/parser/parser.cpp internal/sender/sender.h internal/sender/sender.cpp)
+add_executable (main main.cpp spec/spec.h sender/sender.h sender/sender.cpp)
 target_link_libraries(main ${USED_LIBS})

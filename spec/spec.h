@@ -1,7 +1,6 @@
 #pragma once
 
 #include <string>
-#include <list>
 
 enum queryTypes {
     None = 0,
@@ -12,6 +11,5 @@ enum queryTypes {
 struct Query {
     queryTypes qType;
     std::string host;
-    std::list<std::string> headers;
-    std::list<std::string> body;
+    std::string body;
 };
