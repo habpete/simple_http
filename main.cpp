@@ -24,13 +24,15 @@ int main (int argc, char* argv[]) {
     Query* qParams = new Query();
     qParams->qType = getQueryType(argv[3]);
     qParams->host = argv[4];
-    
+
     if (argc == 5) {
         qParams->body = argv[5];
     }
 
     std::string response;
     Send(qParams, response);
+
+    std::cout << response << std::endl;
 
     return 0;
 }
