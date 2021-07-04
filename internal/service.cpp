@@ -12,5 +12,7 @@ std::string Execute(std::string& pathToCURL) {
 
     std::string resp = Sender::Execute(qParams);
 
+    delete qParams;
+
     return resp;
 }
